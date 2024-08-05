@@ -36,12 +36,25 @@ export const getProjects = async (req, res) => {
         return res.status(200).json({ message: 'Projects retrieved successfully.', projects });
 
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'An error occurred while retrieving projects.' });
+        return res.status(500).json({ message: 'Server error.', error: error.message });
     }
 }
 
+export const getProjectDetails = async (req, res) => {
+    try{
+        const { projectId } = req.query;
+        const project = await Project.findById(projectId)
 
+        if (!project) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        return res.status(200).json({ message: 'Project retrieved successfully.', project });
+
+    }catch(error){
+        return res.status(500).json({ message: 'Server error.', error: error.message });
+    }
+}
 
 export const editProject = async (req, res) => {
     try {
@@ -53,7 +66,6 @@ export const editProject = async (req, res) => {
 
 export const deleteProject = async (req, res) => {
     const { projectId } = req.query;
-    console.log(projectId);
     try {
         const project = await Project.findByIdAndDelete(projectId);
         if (!project) {
