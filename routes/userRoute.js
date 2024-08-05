@@ -1,6 +1,5 @@
 import express from 'express'
 import sanitizeInput from '../middlewares/sanitization.js'
-import auth  from '../middlewares/auth.js'
 import {
     userSignup,
     userLogin,

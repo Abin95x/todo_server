@@ -33,7 +33,6 @@ export async function userSignup(req, res) {
         }
 
     } catch (err) {
-        console.log(err);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
@@ -68,7 +67,6 @@ export const userLogin = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
