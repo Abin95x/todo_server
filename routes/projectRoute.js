@@ -5,13 +5,15 @@ import {
     addProject,
     getProjects,
     editProject,
-    removeProject
+    deleteProject
 } from '../controllers/projectController.js'
 
 const projectRouter = express.Router()
 
 projectRouter.post('/addproject', auth, sanitizeInput, addProject)
 projectRouter.get('/getprojects', auth, getProjects)
+projectRouter.put('/deleteproject', auth, deleteProject)
+
 
 
 
