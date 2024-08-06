@@ -7,7 +7,7 @@ import {
     editProject,
     deleteProject,
     getProjectDetails
-    
+
 } from '../controllers/projectController.js'
 
 const projectRouter = express.Router()
@@ -16,6 +16,8 @@ projectRouter.post('/addproject', auth, sanitizeInput, addProject)
 projectRouter.get('/getprojects', auth, getProjects)
 projectRouter.put('/deleteproject', auth, deleteProject)
 projectRouter.get('/getprojectdetails', auth, getProjectDetails)
+projectRouter.patch('/editproject', auth, sanitizeInput, editProject)
+
 
 
 
