@@ -6,13 +6,17 @@ const todoSchema = new mongoose.Schema({
         ref: "Project",
         required: true
     },
-    description: {
+    task: {
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true,
+    },
     status: {
         type: String,
-        required: true
+        required: true,
     },
 }, { timestamps: true })
 

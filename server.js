@@ -3,6 +3,7 @@ import {connectDB} from './config/dbConfig.js'
 import dotenv from 'dotenv';
 import userRouter from './routes/userRoute.js';
 import projectRouter from './routes/projectRoute.js';
+import todoRouter from './routes/todoRoute.js';
 import cors from 'cors'
 const app = express()
 dotenv.config()
@@ -15,6 +16,8 @@ app.use(cors({
 }))
 app.use('/',userRouter)
 app.use('/project',projectRouter)
+app.use('/todo',todoRouter)
+
 
 
 connectDB(process.env.MONGO_URL)
