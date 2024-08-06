@@ -6,7 +6,8 @@ import {
     getProjects,
     editProject,
     deleteProject,
-    getProjectDetails
+    getProjectDetails,
+    createMd
 
 } from '../controllers/projectController.js'
 
@@ -17,6 +18,8 @@ projectRouter.get('/getprojects', auth, getProjects)
 projectRouter.get('/getprojectdetails', auth, getProjectDetails)
 projectRouter.patch('/editproject', auth, sanitizeInput, editProject)
 projectRouter.put('/deleteproject', auth, deleteProject)
+projectRouter.get('/createmd', auth, createMd)
+
 
 
 
