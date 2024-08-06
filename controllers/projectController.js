@@ -58,11 +58,31 @@ export const getProjectDetails = async (req, res) => {
 
 export const editProject = async (req, res) => {
     try {
+        const { projectId } = req.query;
+        const { title } = req.body;
+
+        if (!projectId || !title) {
+            return res.status(400).json({ message: "Project ID and title are required" });
+        }
+
+        const updatedProject = await Project.findByIdAndUpdate(
+            projectId,
+            { title },
+            { new: true }
+        );
+
+        if (!updatedProject) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        res.status(200).json(updatedProject);
 
     } catch (error) {
-
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
     }
-}
+};
+
 
 export const deleteProject = async (req, res) => {
     const { projectId } = req.query;
