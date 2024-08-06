@@ -4,12 +4,12 @@ export const addTodo = async (req, res) => {
     try {
         const { task, description, userId, projectId } = req.body
 
-         if (!task || !userId || !projectId || !description) {
+        if (!task || !userId || !projectId || !description) {
             return res.status(400).json({ message: 'Task, Description, Project Id User Id are required.' });
         }
 
         const existingTodo = await Todo.findOne({ task, description, userId, projectId });
-        
+
         if (existingTodo) {
             return res.status(409).json({ message: 'A todo with already exists for this user and project.' });
         }
@@ -18,7 +18,7 @@ export const addTodo = async (req, res) => {
             task,
             description,
             projectId,
-            status: 'pending' 
+            status: 'pending'
         });
 
         await newTodo.save();
@@ -34,10 +34,10 @@ export const getTodos = async (req, res) => {
     try {
         const { projectId } = req.query
 
-        if ( !projectId ) {
+        if (!projectId) {
             return res.status(400).json({ message: 'Project Id required.' });
         }
-        const newTodo = await Todo.find({projectId})
+        const newTodo = await Todo.find({ projectId })
 
         return res.status(201).json({ message: 'Todo added successfully.', todo: newTodo });
 
@@ -46,12 +46,11 @@ export const getTodos = async (req, res) => {
     }
 }
 
-
 export const markTodo = async (req, res) => {
     try {
         const { todoId } = req.query
         const todo = await Todo.findById(todoId);
-        
+
         if (!todo) {
             return res.status(404).json({ message: 'Todo not found.' });
         }
@@ -81,6 +80,26 @@ export const deleteTodo = async (req, res) => {
         return res.status(500).json({ message: 'Server error.', error: error.message });
     }
 }
+
+export const updateTodo = async (req, res) => {
+    try {
+        const { todoId } = req.query;
+        const details = req.body;
+        const todo = await Todo.findById(todoId);
+
+        if (!todo) {
+            return res.status(404).json({ message: 'Todo not found.' });
+        }
+
+        Object.assign(todo, details);
+        await todo.save();
+        return res.status(200).json(todo);
+
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error.', error: error.message });
+    }
+}
+
 
 
 

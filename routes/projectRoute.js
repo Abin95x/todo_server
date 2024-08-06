@@ -14,9 +14,9 @@ const projectRouter = express.Router()
 
 projectRouter.post('/addproject', auth, sanitizeInput, addProject)
 projectRouter.get('/getprojects', auth, getProjects)
-projectRouter.put('/deleteproject', auth, deleteProject)
 projectRouter.get('/getprojectdetails', auth, getProjectDetails)
 projectRouter.patch('/editproject', auth, sanitizeInput, editProject)
+projectRouter.put('/deleteproject', auth, deleteProject)
 
 
 
